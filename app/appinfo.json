@@ -1,0 +1,56 @@
+{
+  "uuid": "84c8da78-a489-4a8c-a175-deae836ba466",
+  "shortName": "Skalman",
+  "longName": "Skalman",
+  "companyName": "The Skal Company",
+  "versionCode": 1,
+  "versionLabel": "1.0.0",
+  "watchapp": {
+    "watchface": false
+  },
+  "resources": {
+    "media": [
+      {
+        "menuIcon": true,
+        "type": "png",
+        "name": "IMAGE_MENU_ICON",
+        "file": "images/icon.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_CAPSULE",
+        "file": "images/capsule.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_WATER_MENU",
+        "file": "images/water-menu.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_FOOD_MENU",
+        "file": "images/food-menu.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_ACTION_ICON_PLUS",
+        "file": "images/common/action_icon_plus.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_ACTION_ICON_MINUS",
+        "file": "images/common/action_icon_minus.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_ACTION_ICON_CONFIRM",
+        "file": "images/common/action_icon_confirm.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_CHECKMARK",
+        "file": "images/common/checkmark_round.png"
+      }
+    ]
+  }
+}
