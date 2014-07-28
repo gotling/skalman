@@ -1,8 +1,8 @@
 {
   "uuid": "84c8da78-a489-4a8c-a175-deae836ba466",
-  "shortName": "Skalman",
-  "longName": "Skalman",
-  "companyName": "The Skal Company",
+  "shortName": "Skalman App",
+  "longName": "Skalman App",
+  "companyName": "Gotling",
   "versionCode": 1,
   "versionLabel": "1.0.0",
   "watchapp": {

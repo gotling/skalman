@@ -1,0 +1,21 @@
+{
+  "uuid": "56909a81-39ce-44c9-9570-ce139d178e62",
+  "shortName": "Skalman Watch",
+  "longName": "Skalman Watch",
+  "companyName": "Gotling",
+  "versionCode": 1,
+  "versionLabel": "1.0.0",
+  "watchapp": {
+    "watchface": true
+  },
+  "resources": {
+    "media": [
+    {
+        "menuIcon": true,
+        "type": "png",
+        "name": "IMAGE_MENU_ICON",
+        "file": "../../app/resources/images/icon.png"
+      }
+    ]
+  }
+}

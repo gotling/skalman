@@ -19,3 +19,4 @@
 .lock-waf_darwin_build
 app/src/sustenance/sustenance_data.c
 app/src/sustenance/sustenance_data.h
+watchface/app
