@@ -1,7 +1,7 @@
 #include <pebble.h>
 #include "sustenance_data.h"
 #include "sustenance_report.h"
-#include "../storage.h"
+#include "sustenance_storage.h"
 #include "../common/tools.h"
 
 #define NUM_MENU_SECTIONS 2
