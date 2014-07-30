@@ -23,6 +23,7 @@ typedef enum {
 
 static struct SustenanceState {
 	Mode mode;
+	int id;
 	int unit;
 	int substance_min;
 	int substance_max;
@@ -152,8 +153,11 @@ static void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, v
 		case 1:
 			switch (cell_index->row) {
 				case 0:
-					sustenance.time = time(NULL);
-					sustenance_storage_write_sustenance(&sustenance);
+					if (state.mode == NEW) {
+						sustenance.time = time(NULL);
+					}
+					
+					sustenance_storage_write_sustenance(&sustenance, state.id);
 					window_stack_pop(true);
 					break;
 			}
@@ -194,23 +198,28 @@ void sustenance_report_init(void) {
 	});
 	const bool animated = true;
 
-	sustenance = sustenance_get_default();
-	set_substance();
-	set_amount();
-	state.unit = MILLIGRAM;
-
 	window_stack_push(window, animated);
 }
 
 void sustenance_report_init_new(void) {
 	state.mode = NEW;
+	state.id = -1;
+	sustenance = sustenance_get_default();
+	set_substance();
+	set_amount();
+	state.unit = MILLIGRAM;
 	sustenance_report_init();
 	type_entry();
 }
 
 void sustenance_report_init_edit(int id) {
 	state.mode = EDIT;
+	state.id = id;
 	sustenance_storage_read_sustenance(&sustenance, id);
+	state.substance_min = sustenance_get_substance_min(sustenance.type);
+	state.substance_max = sustenance_get_substance_max(sustenance.type);
+	state.unit = sustenance_get_unit_for_substance(sustenance.substance);
+
 	sustenance_report_init();
 }
 

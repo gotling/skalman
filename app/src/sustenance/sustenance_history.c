@@ -13,6 +13,7 @@ static MenuLayer *menu_layer;
 
 static int sustenance_count = 0;
 static struct Sustenance *sustenances;
+static struct Sustenance sustenance;
 
 static uint16_t menu_get_num_sections_callback(MenuLayer *menu_layer, void *data) {
 	return NUM_MENU_SECTIONS;
@@ -52,11 +53,12 @@ static int sustenance_unit;
 static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuIndex *cell_index, void *data) {
 	switch (cell_index->section) {
 		case 0:
-			sustenance_unit = sustenance_get_unit_for_substance((sustenances[cell_index->row]).substance);
-			sustenance_amount_to_string(sub_text, (sustenances[cell_index->row]).amount, sustenance_unit);
-			sustenance_substance_to_string(title_text, (sustenances[cell_index->row]).substance);
-			format_time_t(time_text, (sustenances[cell_index->row]).time);
-			GBitmap *menu_image = sustenance_image_by_type((sustenances[cell_index->row]).type);
+			sustenance = sustenances[sustenance_count -1 -cell_index->row];
+			sustenance_unit = sustenance_get_unit_for_substance((sustenance).substance);
+			sustenance_amount_to_string(sub_text, (sustenance).amount, sustenance_unit);
+			sustenance_substance_to_string(title_text, (sustenance).substance);
+			format_time_t(time_text, (sustenance).time);
+			GBitmap *menu_image = sustenance_image_by_type((sustenance).type);
 			
 			menu_cell_basic_draw_multiline_with_extra_title(ctx, cell_layer, title_text, time_text, sub_text, menu_image);
 			break;
@@ -74,7 +76,7 @@ static void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, v
 	switch (cell_index->section) {
 		case 0:
 			APP_LOG(APP_LOG_LEVEL_DEBUG, "HISTORY. CALLBACK. EDIT");
-			sustenance_report_init_edit(cell_index->row);
+			sustenance_report_init_edit(sustenance_count -1 -cell_index->row);
 			break;
 		case 1:
 			switch (cell_index->row) {
