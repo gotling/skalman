@@ -153,7 +153,7 @@ static void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, v
 			switch (cell_index->row) {
 				case 0:
 					sustenance.time = time(NULL);
-					storage_write_sustenance(&sustenance);
+					sustenance_storage_write_sustenance(&sustenance);
 					window_stack_pop(true);
 					break;
 			}
@@ -210,7 +210,7 @@ void sustenance_report_init_new(void) {
 
 void sustenance_report_init_edit(int id) {
 	state.mode = EDIT;
-	storage_read_sustenance(&sustenance, id);
+	sustenance_storage_read_sustenance(&sustenance, id);
 	sustenance_report_init();
 }
 

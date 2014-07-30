@@ -56,7 +56,7 @@ static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuI
 					//menu_cell_basic_draw_multiline_with_extra_title(ctx, cell_layer, "sustenance", NULL, NULL, NULL);
 					break;
 				case 1:
-					sustenance_count = storage_get_sustenance_count();
+					sustenance_count = sustenance_storage_get_sustenance_count();
 					snprintf(subbuf, 20, "Done %d so far", sustenance_count);
 					menu_cell_basic_draw(ctx, cell_layer, "History", subbuf, NULL);
 					break;

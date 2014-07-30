@@ -118,10 +118,10 @@ static void window_unload(Window *window) {
 }
 
 static void restore_history() {
-	sustenance_count = storage_get_sustenance_count();
+	sustenance_count = sustenance_storage_get_sustenance_count();
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "HISTORY. INIT. SUSTENANCE COUNT: %d", sustenance_count);
 	sustenances = malloc(sustenance_count * sizeof(struct Sustenance));
-	storage_read_sustenance_all(sustenances);
+	sustenance_storage_read_sustenance_all(sustenances);
 }
 
 void sustenance_history_init(void) {
