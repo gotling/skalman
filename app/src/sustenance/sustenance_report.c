@@ -27,6 +27,7 @@ static struct SustenanceState {
 	int unit;
 	int substance_min;
 	int substance_max;
+	void (*callback_function)(void);
 } state;
 
 static struct Sustenance sustenance;
@@ -155,9 +156,11 @@ static void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, v
 				case 0:
 					if (state.mode == NEW) {
 						sustenance.time = time(NULL);
+						sustenance_storage_write_sustenance(&sustenance);
+					} else {
+						sustenance_storage_update_sustenance(state.id, &sustenance);
 					}
 					
-					sustenance_storage_write_sustenance(&sustenance, state.id);
 					window_stack_pop(true);
 					break;
 			}
@@ -186,6 +189,11 @@ static void window_load(Window *window) {
 static void window_unload(Window *window) {
 	text_layer_destroy(header);
 	menu_layer_destroy(menu_layer);
+
+	if(state.callback_function != NULL) {
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "SUSTENANCE REPORT. WINDOW UNLOAD. CALLBACK FUNCTION");
+		state.callback_function();
+	}
 	
 	window_destroy(window);
 }
@@ -212,9 +220,10 @@ void sustenance_report_init_new(void) {
 	type_entry();
 }
 
-void sustenance_report_init_edit(int id) {
+void sustenance_report_init_edit(int id, void (*callback_function)(void)) {
 	state.mode = EDIT;
 	state.id = id;
+	state.callback_function = callback_function;
 	sustenance_storage_read_sustenance(&sustenance, id);
 	state.substance_min = sustenance_get_substance_min(sustenance.type);
 	state.substance_max = sustenance_get_substance_max(sustenance.type);

@@ -72,11 +72,16 @@ static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuI
 	}
 }
 
+static void reload_menu(void) {
+	sustenance_storage_read_sustenance_all(sustenances);
+	menu_layer_reload_data(menu_layer);
+}
+
 static void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *data) {
 	switch (cell_index->section) {
 		case 0:
 			APP_LOG(APP_LOG_LEVEL_DEBUG, "HISTORY. CALLBACK. EDIT");
-			sustenance_report_init_edit(sustenance_count -1 -cell_index->row);
+			sustenance_report_init_edit(sustenance_count -1 -cell_index->row, &reload_menu);
 			break;
 		case 1:
 			switch (cell_index->row) {

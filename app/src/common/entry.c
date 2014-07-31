@@ -164,7 +164,6 @@ static void window_unload(Window *window) {
 	action_bar_layer_destroy(action_bar);
 	
 	if(state.callback && state.action_type == ACTION_CONFIRM) {
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "ENTRY. WINDOW UNLOAD. state.action_type: %d", state.action_type);
 		state.callback_function();
 	}
 
